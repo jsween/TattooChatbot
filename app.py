@@ -74,7 +74,7 @@ print(classification_report(y_test, preds, zero_division=0))
 
 # Simple response lookup
 responses = df.groupby("intent")["response"].apply(list).to_dict()
-
+joblib.dump(model, "chatbot_model.pkl")
 
 # Test
 while True:
