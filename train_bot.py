@@ -1,46 +1,23 @@
 import joblib
 import pandas as pd
-import re
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
+import utils
 
-def normalize_text(text):
-    text = text.lower().strip()
-    # common
-    replacements = {
-        r"\bu\b": "you",
-        r"\bur\b": "your",
-        r"\bappt\b": "appointment",
-        r"\bavail\b": "availability",
-        r"\bloc\b": "location",
-        r"\baddr\b": "address",
-        r"\binfo\b": "information",
-        r"\bwa\b": "washington",
-    }
 
-    for pattern, replacement in replacements.items():
-        text = re.sub(pattern, replacement, text)
-
-    # normalize repeated punctuation
-    text = re.sub(r"[!?]+", " ", text)
-
-    # remove extra spaces
-    text = re.sub(r"\s+", " ", text).strip()
-
-    return text
 
 def chatbot_reply(user_message):
-    cleaned = normalize_text(user_message)
+    cleaned = utils.normalize_text(user_message)
     intent = model.predict([cleaned])[0]
     return responses[intent][0]
 
 # Load data
 df = pd.read_csv("data/tattoo_chatbot_data.csv")
 df = df.sample(frac=1, random_state=42).reset_index(drop=True)
-X = df["user_input"].apply(normalize_text)
+X = df["user_input"].apply(utils.normalize_text)
 y = df["intent"]
 
 intent_counts = y.value_counts()
