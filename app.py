@@ -4,16 +4,25 @@ import joblib
 import pandas as pd
 import utils
 
-model = joblib.load("chatbot_model.pkl")
+@st.cache_resource
+def load_model():
+    return joblib.load("chatbot_model.pkl")
 
-df = pd.read_csv("data/tattoo_chatbot_data.csv")
-responses = df.groupby("intent")["response"].apply(list).to_dict()
+@st.cache_data
+def load_data():
+    df_cb = pd.read_csv("data/tattoo_chatbot_data.csv")
+    rspns = df_cb.groupby("intent")["response"].agg(list).to_dict()
+    return df_cb, rspns
+
+with st.spinner("Loading tattoo chatbot..."):
+    model = load_model()
+    df, responses = load_data()
 
 if "user_input" not in st.session_state:
     st.session_state.user_input = ""
 
 st.title("Sweeney Ink Tattoo Chatbot")
-st.text("v1.1")
+st.text("v1.2")
 
 with st.form(key="chat_form", clear_on_submit=True):
     user_input = st.text_input("Your question", key="user_input")
