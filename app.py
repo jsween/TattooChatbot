@@ -55,7 +55,8 @@ if submitted and user_input:
         intent = model.predict([utils.normalize_text(user_input)])[0]
         response = chatbot_reply(user_input)
 
-        st.markdown(f"### 🤖 **Response:**")
+        st.write(f"🤖 **Response:**")
         st.write(response)
-        st.write(f"\n**Last Question Asked:** {user_input}")
+        st.write()
+        st.write(f"**Last Question Asked:** {user_input}")
         st.write(f"**Determined Intent:** {intent}")
