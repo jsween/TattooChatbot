@@ -3,7 +3,7 @@
 #### By Jon Sweeney
 
 ### Description:
-A chatbot to assist with my tattoo business by answering questions before and after tattoo sessions.
+A chatbot, named Ted, to assist with my tattoo business by answering questions before and after tattoo sessions.
 
 ### Requirements:
 - python 3.14+

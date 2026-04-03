@@ -33,14 +33,14 @@ def chatbot_reply(user_message):
 
     return picked
 
-with st.spinner("Loading tattoo chatbot..."):
+with st.spinner("Loading tattoo chatbot Ted..."):
     model = load_model()
     df, responses = load_data()
 
 if "last_response" not in st.session_state:
     st.session_state.last_response = {}
 
-st.title("Sweeney Ink Tattoo Chatbot")
+st.title("Ted: Sweeney Ink's Tattoo Chatbot")
 st.text("v1.4")
 
 with st.form(key="chat_form", clear_on_submit=True):
@@ -55,7 +55,7 @@ if submitted and user_input:
         intent = model.predict([utils.normalize_text(user_input)])[0]
         response = chatbot_reply(user_input)
 
-        st.markdown(f"#### Chatbot **Response:**")
+        st.markdown(f"#### Ted's **Response:**")
         st.write(response)
         st.write('\n')
         st.write(f"**Last Question Asked:** {user_input}")
