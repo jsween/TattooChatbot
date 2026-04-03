@@ -13,7 +13,7 @@ last_response = {}  # tracks last response per intent to avoid repetition
 def chatbot_reply(user_message):
     # normalize the input
     cleaned = utils.normalize_text(user_message)
-    # get confideneore
+    # get confidence
     proba = model.predict_proba([cleaned])[0]
     # if model isn't confident enough, fallback to generic response
     if proba.max() < 0.4:
