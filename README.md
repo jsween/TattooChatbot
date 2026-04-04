@@ -14,3 +14,4 @@ A chatbot, named Ted, to assist with my tattoo business by answering questions b
 2. Open a terminal inside root directory of **TattooChatbot**
 3. Execute ```pip install -r requirements.txt``` to install required libraries
 4. Execute ```python train_bot.py``` to train and test locally
+5. Execute ```streamlit run app.py``` and navigate to displayed local url to run website locally

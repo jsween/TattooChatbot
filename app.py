@@ -13,6 +13,8 @@ def load_data():
     df_cb = pd.read_csv("data/tattoo_chatbot_data.csv")
     rspns = df_cb.groupby("intent")["response"].agg(list).to_dict()
     return df_cb, rspns
+
+
 def chatbot_reply(user_message):
     cleaned = utils.normalize_text(user_message)
     intnt = model.predict([cleaned])[0]
@@ -32,6 +34,7 @@ def chatbot_reply(user_message):
     st.session_state.last_response[intnt] = picked
 
     return picked
+
 
 with st.spinner("Loading tattoo chatbot Ted..."):
     model = load_model()
